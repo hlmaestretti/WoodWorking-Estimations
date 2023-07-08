@@ -11,12 +11,14 @@ class Board:
         - width  -  The width of the piece of wood
         
     Methods:
-        - get_length  - Returns the length of the board
-        - get_width   - Returns the width of the board
-        - shift_board - Switches the length and width of the board
-        - get_area    - Returns the area of the board
-        - can_fit     - Checks to see if another board can be cut from the board. True if it can, false
-                        otherwise
+        - get_length       - Returns the length of the board
+        - get_width        - Returns the width of the board
+        - shift_board      - Switches the length and width of the board
+        - get_area         - Returns the area of the board
+        - get_surface_area - Calculates the surface area of the board
+        - get_volume       - Calculates the volume of the board
+        - can_fit          - Checks to see if another board can be cut from the board. True if it can, false
+                             otherwise
     """
     def __init__(self, length, width, thickness):
         self._length = length
