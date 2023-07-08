@@ -11,12 +11,8 @@ It accounts for the thickness of the saw blade and it is assumed that the thickn
 
 
 
-
-## Board
-This file contains the Board class, which represents a piece of wood that is be used in the program board_cutter to store all needed information for each board.
-
-### Functions and Classes
-#### Board 
+## Functions and Classes
+### Board 
 The class represents a piece of wood with a particular width  and length. It has the following Methods:
   - get_length  - Returns the length of the boar
   - get_width   - Returns the width of the board
@@ -26,7 +22,7 @@ The class represents a piece of wood with a particular width  and length. It has
   - get_volume       - Calculates the volume of the board
   - can_fit     - Checks to see if another board can be cut from the board. True if it can, false otherwise
 
-## canFit
+### canFit
 This file contains the functions needed to run the canFit function that will check to see if the desired cuts can fit in the available wood
 It is set up as a script to be used quickly. Here are the functions
   - InvalidInput - Exception class that handles errors for input
