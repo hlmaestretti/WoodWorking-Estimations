@@ -56,22 +56,22 @@ def canFit(list_of_cuts, boards, saw_thickness=.125, cuts=""):
             possible_actions = []
             # possible cuts that could be done on the board
             if piece.get_width() >= cut.get_width() and piece.get_length() >= cut.get_length():
-                scraps1 = [Board(cut.get_length(), piece.get_width() - cut.get_width(), cut.thickness),
-                           Board(piece.get_width(), piece.get_length() - cut.get_length(), cut.thickness)
+                scraps1 = [Board(cut.get_length(), piece.get_width() - cut.get_width(), cut.get_thickness()),
+                           Board(piece.get_width(), piece.get_length() - cut.get_length(), cut.get_thickness())
                            ]
-                scraps2 = [Board(piece.get_width() - cut.get_width(), piece.get_length(), cut.thickness),
-                           Board(cut.get_width(), piece.get_length() - cut.get_length(), cut.thickness)
+                scraps2 = [Board(piece.get_width() - cut.get_width(), piece.get_length(), cut.get_thickness()),
+                           Board(cut.get_width(), piece.get_length() - cut.get_length(), cut.get_thickness())
                            ]
                 possible_cuts.append(scraps1)
                 possible_cuts.append(scraps2)
                 possible_actions.append("Horizontal")
                 possible_actions.append("Horizontal")
             if piece.get_width() >= cut.get_length() and piece.get_length() >= cut.get_width():
-                scraps3 = [Board(piece.get_width() - cut.get_length(), cut.get_width(), cut.thickness),
-                           Board(piece.get_length() - cut.get_width(), piece.get_length(), cut.thickness)
+                scraps3 = [Board(piece.get_width() - cut.get_length(), cut.get_width(), cut.get_thickness()),
+                           Board(piece.get_length() - cut.get_width(), piece.get_length(), cut.get_thickness())
                            ]
-                scraps4 = [Board(piece.get_width() - cut.get_length(), piece.get_length(), cut.thickness),
-                           Board(piece.get_length() - cut.get_width(), cut.get_length(), cut.thickness)
+                scraps4 = [Board(piece.get_width() - cut.get_length(), piece.get_length(), cut.get_thickness()),
+                           Board(piece.get_length() - cut.get_width(), cut.get_length(), cut.get_thickness())
                            ]
                 possible_cuts.append(scraps3)
                 possible_cuts.append(scraps4)
