@@ -1,9 +1,41 @@
 #
 
 from Board import Board
-from misc_functions_classes import larger_number, InvalidInput, board_sort
 
 
+class InvalidInput(Exception):
+    """
+    Raises when an incorrect input is given
+    """
+    pass
+
+
+def board_sort(list_of_boards):
+    """
+    This will be a simple insertion sorting function that uses the length of the board objects and sorts
+    them in ascending order. If the width is larger than the width for a board, the two numbers are switched.
+    """
+    for index in range(1, len(list_of_boards)):
+        board = list_of_boards[index]
+        if board.get_length() < board.get_width():
+            board.shift_board()
+
+        pos = index - 1
+        while pos >= 0 and list_of_boards[pos].get_length() < board.get_length():
+            list_of_boards[pos + 1] = list_of_boards[pos]
+            pos -= 1
+        list_of_boards[pos + 1] = board
+
+def larger_number(num1, num2):
+    """
+    larger_number is a simple compare function that returns the larger of two numbers. It returns the second
+    number if they are the same size.
+    """
+    if num1 > num2:
+        return num1
+
+    return num2
+    
 def can_cut_boards_from_boards(list_of_cuts, boards, saw_thickness, cuts = ""):
     """
     This will act recursively to find the see if all the list of cuts can be done on the given boards.
