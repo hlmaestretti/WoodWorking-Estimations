@@ -34,3 +34,4 @@ class TestVariousFunctions(unittest.TestCase):
         list_boards = [(47, 3, 1)]
         test = canFit.canFit(list_cuts, list_boards, .125)
         self.assertIsInstance(test, list, "Test 3 passed")
+
