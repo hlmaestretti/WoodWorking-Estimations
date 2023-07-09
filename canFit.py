@@ -26,7 +26,18 @@ def board_sort(list_of_boards):
             pos -= 1
         list_of_boards[pos + 1] = board
 
-    
+
+def convert_list(list_of_cuts):
+    """
+    The convert_list function converts a list of tuples into a list of boards
+    """
+    for cut_index, cut in enumerate(list_of_cuts):
+        try:
+            list_of_cuts[cut_index] = Board(cut[0], cut[1], cut[2])
+        except ValueError:
+            raise InvalidInput
+
+
 def canFit(list_of_cuts, boards, saw_thickness=.125, cuts=""):
     """
     The canFit function tests to see if a list of cutouts can fit into the available boards recursively.
@@ -43,8 +54,12 @@ def canFit(list_of_cuts, boards, saw_thickness=.125, cuts=""):
     
     if cuts == "":
         cuts = ["base"]
+        convert_list(list_of_cuts)
+        convert_list(boards)
         board_sort(list_of_cuts)
         board_sort(boards)
+        if sum([x.get_area() for x in boards]) < sum([y.get_area() for y in list_of_cuts]):
+            return False
     
     cut = list_of_cuts[0]
     for index, piece in enumerate(boards):
@@ -64,8 +79,6 @@ def canFit(list_of_cuts, boards, saw_thickness=.125, cuts=""):
                            ]
                 possible_cuts.append(scraps1)
                 possible_cuts.append(scraps2)
-                possible_actions.append("Horizontal")
-                possible_actions.append("Horizontal")
             if piece.get_width() >= cut.get_length() and piece.get_length() >= cut.get_width():
                 scraps3 = [Board(piece.get_width() - cut.get_length(), cut.get_width(), cut.get_thickness()),
                            Board(piece.get_length() - cut.get_width(), piece.get_length(), cut.get_thickness())
@@ -75,72 +88,24 @@ def canFit(list_of_cuts, boards, saw_thickness=.125, cuts=""):
                            ]
                 possible_cuts.append(scraps3)
                 possible_cuts.append(scraps4)
-                possible_actions.append("Vertical")
-                possible_actions.append("Vertical")
-                
+
+            for possible in possible_cuts:
+                will_pop = []
+                for ind, scraps in enumerate(possible):
+                    if scraps.get_length() <= 0 or scraps.get_width() <= 0:
+                        will_pop.append(ind)
+                for item in reversed(will_pop):
+                    possible.pop(item)
+
             for i in range(len(possible_cuts)):
                 temp = boards[:]
                 boards.pop(index)
                 boards = boards + possible_cuts[i]
-                testing_cuts = canFit(list_of_cuts[1:], boards, saw_thickness, cuts + [possible_actions[i]])
+                testing_cuts = canFit(list_of_cuts[1:], boards, saw_thickness,
+                                      cuts + [f"cut from ({piece.get_length()}, {piece.get_width()})"])
                 boards = temp
                 if testing_cuts is not False:
+                    # print([(x.get_length(), x.get_width()) for x in boards])
                     return testing_cuts
 
     return False
-
-
-if __name__ == "__main__":
-    print("Please give the dimensions of the boards you want to cut one at a time. Leave blank if you are done."
-          "Format: length, width, thickness")
-    list_cuts = [(11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1),
-                 (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1),
-                 (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1),
-                 (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1),
-                 (40, .75, 1)]
-    list_boards = [(48, 9, 1)]
-
-    print(list_cuts)
-    # while True:
-    #     item = input()
-    #     if item == "":
-    #         break
-    #     nums = item.split(",")
-    #     list_boards.append((float(nums[0]), float(nums[1]), float(nums[2]))
-
-    for cut_index, cut in enumerate(list_cuts):
-        try:
-            list_cuts[cut_index] = Board(cut[0], cut[1], cut[2])
-        except ValueError:
-            raise InvalidInput
-
-    for board_index, board in enumerate(list_boards):
-        try:
-            list_boards[board_index] = Board(board[0], board[1], board[2])
-        except ValueError:
-            raise InvalidInput
-
-    board_sort(list_cuts)
-    board_sort(list_boards)
-
-    # board_to_be_cut = input("Please give me the size of the board that will be cut in the format (length, width)")
-    # temp_item = board_to_be_cut.split(",")
-    # board_to_be_cut = Board(float(temp_item[0]), float(temp_item[1]))
-    #
-    # if not isinstance(board_to_be_cut, Board):
-    #     raise InvalidInput
-
-    saw_blade = float(input("Please give me the thickness of the saw blade (typical is .125 in)."
-                            " Please give number in inches."))
-
-    if not isinstance(saw_blade, (int, float)):
-        raise InvalidInput
-
-    test = canFit(list_cuts, list_boards, saw_blade)
-    if not test:
-        print("The pieces you requested cannot all fit on this board!")
-
-    else:
-        print("The pieces you requested can all fit on this board! The cuts are as follows:")
-        for cut_index in range(len(test)):
-            print((list_cuts[cut_index].get_length(), list_cuts[cut_index].get_width()), test[cut_index])
