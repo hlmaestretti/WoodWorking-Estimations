@@ -22,6 +22,6 @@ def woodCutEstimate(feed_rate, load_time, cut_list):
     """
     cut_length = 0
     for board in cut_list:
-        cut_length += (board.get_length() + board.get_width())
+        cut_length += (board[0] + board[1])
 
-    return feed_rate*cut_length + load_time*len(cut_list)
+    return cut_length/feed_rate + load_time*len(cut_list)

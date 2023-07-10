@@ -98,7 +98,7 @@ class Board:
             Boolean - True if it is possible
                     - False if it is not
         """
-        if self._thickness <= another_board.get_thickness():
+        if self._thickness >= another_board.get_thickness():
             if self._length >= another_board.get_length():
                 if self._width >= another_board.get_width():
                     return True
