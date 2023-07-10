@@ -5,6 +5,7 @@ This file contains various unit tests for the main functionality of the program
 import unittest
 import canFit
 
+
 class TestVariousFunctions(unittest.TestCase):
 
     def test_canFit(self):

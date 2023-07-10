@@ -1,5 +1,8 @@
-# This file contains the Board class, which represents a piece of wood that will be used in the program 
-# cutting_some_boards
+"""
+This file contains the Board class, which represents a piece of wood that will be used in the program
+cutting_some_boards
+"""
+
 
 class Board:
     """

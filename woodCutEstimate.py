@@ -2,6 +2,7 @@
 This File contains all the needed components for the woodCutEstimate function.
 """
 
+
 def woodCutEstimate(feed_rate, load_time, cut_list):
     """
     The woodCutEstimate function estimates the time it will take to cut all the wood in a given cut list. It does
