@@ -16,12 +16,18 @@ def end():
 def convert_str_to_list_tuples():
     exit_flag = True
     while exit_flag:
-        list_of_cuts = input("Enter in the following fomrat: (list of tuple of (length, width, thickness)) \n")
+        list_of_cuts = input("Enter in the following foemat: (list of tuple of (length, width, thickness)) \n")
 
         if list_of_cuts == '4':
             end()
+        try:
+            list_of_cuts = literal_eval(list_of_cuts)
+        except ValueError:
+            print("Error in input, try again. Enter 4 to quit")
+            continue
 
-        list_of_cuts = literal_eval(list_of_cuts)
+        if not isinstance(list_of_cuts, list):
+            continue
         for index, cut in enumerate(list_of_cuts):
             if isinstance(cut, tuple):
                 for num in cut:
@@ -56,12 +62,12 @@ if __name__ == "__main__":
 
     while True:
         answer = input()
-        if int(answer) in [1, 2, 3, 4]:
-            break
-        else:
+        try:
+            answer = int(answer)
+            if int(answer) in [1, 2, 3, 4]:
+                break
+        except ValueError:
             print("Error, incorrect entry, try again. Type 4 to quit")
-
-    answer = int(answer)
 
     if answer == 4:
         end()
