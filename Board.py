@@ -108,3 +108,20 @@ class Board:
                     return True
             
         return False
+
+
+def board_sort(list_of_boards):
+    """
+    This will be a simple insertion sorting function that uses the length of the board objects and sorts
+    them in ascending order. If the width is larger than the length of a given board, the two numbers are switched.
+    """
+    for index in range(1, len(list_of_boards)):
+        board = list_of_boards[index]
+        if board.get_length() < board.get_width():
+            board.shift_board()
+
+        pos = index - 1
+        while pos >= 0 and list_of_boards[pos].get_length() < board.get_length():
+            list_of_boards[pos + 1] = list_of_boards[pos]
+            pos -= 1
+        list_of_boards[pos + 1] = board

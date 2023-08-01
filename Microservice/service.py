@@ -42,9 +42,7 @@ def get_cost():
                     # Add each item to the formatted list as a dictionary
                     formatted_item = {
                         "item_name": item["item_name"],
-                        "price": item["price"],
-                        "quantity": item["quantity"]
-                        # Add more fields as needed
+                        "price": item["price"]
                     }
                     formatted_items.append(formatted_item)
 
@@ -55,7 +53,6 @@ def get_cost():
 
             except json.JSONDecodeError as e:
                 print(f"Error parsing JSON: {e}")
-
 
         else:
             print('"items" list not found in the HTML.')
