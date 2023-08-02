@@ -7,6 +7,7 @@ import canFit
 import Board
 import woodCutEstimate
 import random
+import woodCostEstimate
 
 
 class TestVariousFunctions(unittest.TestCase):
@@ -87,9 +88,28 @@ class TestVariousFunctions(unittest.TestCase):
             x = random.randint(1, 100)
             y = random.randint(1, 100)
             list2.append((x, y, 1))
-            cut_length += (x+y)
+            cut_length += (x + y)
 
         feed_rate = 14
         load_time = 1
-        self.assertEquals(cut_length/feed_rate+load_time*len(list2),
-                          woodCutEstimate.woodCutEstimate(feed_rate, load_time, list2 ))
+        self.assertEquals(cut_length / feed_rate + load_time * len(list2),
+                          woodCutEstimate.woodCutEstimate(feed_rate, load_time, list2))
+
+    def test_woodCostEstimate(self):
+        """
+        This tests the functionality of the woodCostEstimate feature
+        """
+        list1 = [(12, 12, 1)]
+        for ind, board in enumerate(list1):
+            list1[ind] = Board.Board(board[0], board[1], board[2])
+
+        self.assertEqual(round(12.99 * 1.3, 2), woodCostEstimate.estimator(list1, "walnut"))
+
+        list2 = [(11.5, 12, 1), (11.5, 1, 1), (40, 6, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1), (11.5, 1, 1)]
+        volume = 0
+        for ind, board in enumerate(list2):
+            list2[ind] = Board.Board(board[0], board[1], board[2])
+            volume += board[0] * board[1] * board[2]
+        volume = volume / 144  # convert in^3 to board ft
+
+        self.assertEqual(round(1.3*15.99*volume, 2),woodCostEstimate.estimator(list2, "padauk"))

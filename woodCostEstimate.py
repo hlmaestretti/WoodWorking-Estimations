@@ -9,6 +9,15 @@ import requests
 from Board import Board, board_sort
 
 
+class RequestError(Exception):
+    """
+    This is a custom error for when the request fails
+    """
+    def __init__(self, message):
+        self.message = message
+        super().__init__(self.message)
+
+
 def make_request(criteria):
     """
     The make_request function receives a search request and sends it to the microservice where
@@ -43,10 +52,11 @@ def make_request(criteria):
         # Getting the response content and printing it
         data = response.json()
 
-        print(data)
+        return data
     else:
         # Handle unsuccessful requests
         print(f"Request failed with status code {response.status_code}")
+        return 0
 
 
 def get_total_board_feet(list_of_cuts, thickness=4) -> float:
@@ -63,9 +73,10 @@ def get_total_board_feet(list_of_cuts, thickness=4) -> float:
     """
     board_sort(list_of_cuts)
     board_feet = 0
+
     for board in list_of_cuts:
         length_ft = board.get_length() / 12
-        cross_section = thickness * board.get_width()
+        cross_section = thickness / 4 * board.get_width()
         board_feet += length_ft * cross_section / 12
 
     return board_feet
@@ -86,3 +97,21 @@ def estimator(list_of_cuts, wood_type, thickness=4) -> float:
     """
     criteria = wood_type + " " + str(thickness)
     board_feet = get_total_board_feet(list_of_cuts)
+    list_of_options = make_request(criteria)
+
+    if list_of_options == 0:
+        raise RequestError("Server failed to return data")
+
+    price = 0
+
+    for option in list_of_options:
+        if "lumber" in option["item_name"].lower():
+
+            price = option["price"]
+            break
+
+    if price == 0:
+        raise RequestError("Request did not receive the price of any lumber.")
+
+    return round(1.3 * price * board_feet, 2)
+

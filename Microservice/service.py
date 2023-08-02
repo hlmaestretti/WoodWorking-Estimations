@@ -63,36 +63,3 @@ def get_cost():
 if __name__ == '__main__':
     app.run(port=5000)
 
-
-# # Make the HTTP request to fetch the HTML content
-    # response = requests.get(url)
-    #
-    # # Check if the request was successful
-    # if response.status_code == 200:
-    #     # Parse the HTML content with Beautiful Soup
-    #     soup = BeautifulSoup(response.text, 'html.parser')
-    #     print(soup)
-    #     # Find all elements that contain the pattern "$*.^"
-    #     pattern = re.compile(r'\$([\d,]+)\.(\d{2})')
-    #
-    #     matches = pattern.findall(response.text)
-    #
-    #     if matches:
-    #         # Find all elements that contain the pattern "$*.^"
-    #         elements_with_pattern = soup.find_all(text=pattern)
-    #
-    #         # Iterate through the matches and extract their corresponding text
-    #         for price_match, element in zip(matches, elements_with_pattern):
-    #             dollars, cents = price_match
-    #             price = float(f"{dollars.replace(',', '')}.{cents}")
-    #
-    #             # Extract the text surrounding the element or its parent element
-    #             text = element.parent.text.strip() if element.parent else element.strip()
-    #
-    #             print("Price:", price)
-    #             print("Text:", text)
-    #             print()
-    #     else:
-    #         print("Price not found.")
-    # else:
-    #     print("Failed to fetch the website content.")
