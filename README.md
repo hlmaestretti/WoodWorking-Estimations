@@ -7,7 +7,10 @@ It accounts for the thickness of the saw blade and it is assumed that the thickn
 
 
 ## Future Plans
-  - To be added
+  - Create a printout of where each cut should be for canFit.
+  - Create board objects from a given .stl file (CAD)
+  - Create estimators for sanding and joining and update current estimators to be more robust
+  - Create a better UI
 
 
 
