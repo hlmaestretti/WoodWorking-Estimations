@@ -21,5 +21,3 @@ Currently it can do the following:
 ## Quick Start
 - TBD
 
-## How to Use
-- TBD

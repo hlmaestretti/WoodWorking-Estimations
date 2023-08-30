@@ -1,6 +1,6 @@
 
 
-from Board import Board, board_sort
+from misc_functions.Board import Board, board_sort
 
 
 class InvalidInput(Exception):
@@ -21,7 +21,7 @@ def convert_list(list_of_cuts):
             raise InvalidInput
 
 
-def canFit(list_of_cuts, boards, saw_thickness=.125, cuts=""):
+def can_fit(list_of_cuts, boards, saw_thickness=.125, cuts=""):
     """
     The canFit function tests to see if a list of cutouts can fit into the available boards recursively.
 
@@ -84,8 +84,8 @@ def canFit(list_of_cuts, boards, saw_thickness=.125, cuts=""):
                 temp = boards[:]
                 boards.pop(index)
                 boards = boards + possible_cuts[i]
-                testing_cuts = canFit(list_of_cuts[1:], boards, saw_thickness,
-                                      cuts + [f"cut from ({piece.get_length()}, {piece.get_width()})"])
+                testing_cuts = can_fit(list_of_cuts[1:], boards, saw_thickness,
+                                       cuts + [f"cut from ({piece.get_length()}, {piece.get_width()})"])
                 boards = temp
                 if testing_cuts is not False:
                     # print([(x.get_length(), x.get_width()) for x in boards])

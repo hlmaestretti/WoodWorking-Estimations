@@ -1,16 +1,10 @@
-from flask import Flask, request, jsonify
-from bs4 import BeautifulSoup
+from flask import request, jsonify
 import requests
 import json
 import re
 
-app = Flask(__name__)
 
-
-@app.route('/get_cost', methods=['POST'])
-def get_cost():
-    # Grab the search criteria from the request
-    criteria = request.json['criteria']
+def get_cost(criteria):
 
     # Append it to the WoodworkersSource URL
     url = f"https://www.woodworkerssource.com/search.html?Search={criteria}"
@@ -46,10 +40,7 @@ def get_cost():
                     }
                     formatted_items.append(formatted_item)
 
-                json_response = jsonify(formatted_items)
-
-                # Return the JSON response
-                return json_response
+                return formatted_items
 
             except json.JSONDecodeError as e:
                 print(f"Error parsing JSON: {e}")
@@ -58,8 +49,4 @@ def get_cost():
             print('"items" list not found in the HTML.')
     else:
         print("Failed to fetch the website content.")
-
-
-if __name__ == '__main__':
-    app.run(port=5000)
 
