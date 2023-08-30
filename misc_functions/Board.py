@@ -125,3 +125,26 @@ def board_sort(list_of_boards):
             list_of_boards[pos + 1] = list_of_boards[pos]
             pos -= 1
         list_of_boards[pos + 1] = board
+
+
+def get_total_board_feet(list_of_cuts, thickness=4) -> float:
+    """
+    The get_total_volume function calculates the total board feet of the list of cuts.
+    A board foot is 144 in^3 of wood. It is usually given in the format of length as if it had a
+    cross-section of 12 in^2. So if a board has a cross-section of 6 in^2 then one board foot
+    would be 2 feet long
+
+    Receives:
+        - List of board objects
+    Returns:
+        -board feet of list
+    """
+    board_sort(list_of_cuts)
+    board_feet = 0
+
+    for board in list_of_cuts:
+        length_ft = board.get_length() / 12
+        cross_section = thickness / 4 * board.get_width()
+        board_feet += length_ft * cross_section / 12
+
+    return board_feet
