@@ -42,7 +42,7 @@ The functions are:
 ### woodCostEstimator
 This file contains the functions needed to perform a cost estimate on the needed wood for the project. It utilizes a microservice created by my teammate to grab the price of the wood from an online source.
 
-The functions contained in the file are:
+The functions contained in the file are: 
 - RequestError         - This is a custom handler used for issues regarding the data received from the request
 - make_request         - This function calls to the microservice to obtain a list of prices of wood fitting a specific criteria
 - get_total_board_feet - This function finds the volume of a list of boards in board foot.
