@@ -15,9 +15,3 @@ Currently it can do the following:
 - Create estimators for sanding and joining and update current estimators to be more robust
 - Create a better UI for the package
 
-## Install 
-- TBD
-
-## Quick Start
-- TBD
-
