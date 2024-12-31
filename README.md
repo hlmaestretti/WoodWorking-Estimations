@@ -7,6 +7,12 @@ Currently it can do the following:
 - Calculate a wood cost estimate.
 - Calculate a time estimate for cutting the wood.
 
+## Quick Start
+TBD
+
+## Detailed Guide
+TBD
+
 ## Future Plans
 - Create a printout of where each cut should be for canFit.
 - Create board objects from a given .stl file (CAD)
