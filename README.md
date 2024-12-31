@@ -8,7 +8,11 @@ Currently it can do the following:
 - Calculate a time estimate for cutting the wood.
 
 ## Quick Start
-TBD
+- Download the repo
+- Run the following command: 
+  ```python basicUI.py```
+- From here, you have the following choices:
+  1
 
 ## Detailed Guide
 TBD
