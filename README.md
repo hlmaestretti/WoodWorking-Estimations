@@ -11,13 +11,12 @@ Currently it can do the following:
 - Download the repo
 - Run the following command: 
   ```python basicUI.py```
-- From here, you have the following choices:
-  1
+- Use option 2 and input the dimensions required.
 
 ## Detailed Guide
 TBD
 
-## Future Plans
+## Future Development
 - Create a printout of where each cut should be for canFit.
 - Create board objects from a given .stl file (CAD)
 - From the .stl file, find the number of joints need to calculate the gluing/joining cost
