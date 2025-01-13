@@ -1,5 +1,5 @@
 # WoodWorking-Estimations
-A python package that is meant to optimize the cost and time estimations for woodworking projects.
+A python package that is meant to optimize the cost and time estimations for woodworking projects. This was a personal project of mine that I worked on off and on for a year. The goal was create quick estimations of how much wood I would need for various projects and to optimize the usage of the bought wood. At some point, this project was used in a school assignment, which added other features like price estimation and time estimation.
 
 Currently it can do the following:
 - Indicate if a the desired cuts can fit in the wood you have available.
@@ -12,9 +12,6 @@ Currently it can do the following:
 - Run the following command: 
   ```python basicUI.py```
 - Use option 2 and input the dimensions required.
-
-## Detailed Guide
-TBD
 
 ## Future Development
 - Create a printout of where each cut should be for canFit.
